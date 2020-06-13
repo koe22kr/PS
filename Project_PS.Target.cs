@@ -3,12 +3,12 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class New_GameTarget : TargetRules
+public class Project_PSTarget : TargetRules
 {
-	public New_GameTarget(TargetInfo Target) : base(Target)
+	public Project_PSTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 
-		ExtraModuleNames.AddRange( new string[] { "New_Game" } );
+		ExtraModuleNames.AddRange( new string[] { "Project_PS" } );
 	}
 }

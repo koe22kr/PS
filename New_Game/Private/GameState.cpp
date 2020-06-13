@@ -5,7 +5,6 @@
 
 Game_State::Game_State()
 {//default size = 25
-    mSizeX,mSizeY = 5;
     mScore = 0;
 }
 

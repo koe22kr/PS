@@ -7,7 +7,7 @@
 #include "Gem.generated.h"
 
 UCLASS()
-class NEW_GAME_API AGem : public AActor
+class Project_PS_API AGem : public AActor
 {
 	GENERATED_BODY()
 	

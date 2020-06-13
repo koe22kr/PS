@@ -2,7 +2,7 @@
 
 
 #include "GemSwapper.h"
-#include "New_Game.h"
+#include "Project_PS.h"
 Gem_Checker::Gem_Checker()
 {
     mCounter = 0;
