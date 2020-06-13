@@ -21,7 +21,7 @@ public:
             {
                 UINT8 idx = i * k + k;
 
-                mBoard.Add(GamePiece(id, idx));
+               // mBoard.Add(GamePiece(id, idx));
 
 
             }
