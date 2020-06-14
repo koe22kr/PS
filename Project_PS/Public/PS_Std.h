@@ -10,6 +10,6 @@
 
 enum class GemID
 {
-    NONE,RED,GREEN,BLUE
+    RED,GREEN,BLUE
 };
 //·£´ý gem id ÃßÃ· ¸¸µé±â..2

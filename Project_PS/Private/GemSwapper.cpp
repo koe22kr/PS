@@ -3,19 +3,19 @@
 
 #include "GemSwapper.h"
 #include "Project_PS.h"
-Gem_Checker::Gem_Checker()
+GemSwapper::GemSwapper()
 {
     mCounter = 0;
 }
 
-Gem_Checker::~Gem_Checker()
+GemSwapper::~GemSwapper()
 {
 }
-void Gem_Checker::Set_Gem(AGem* gem)
+void GemSwapper::Set_Gem(AGem* gem)
 {
     if (mCounter>1)
     {
-        KLOG(Warning, TEXT("%s"), TEXT("Gem_Checker->m_Counter>1"));
+        KLOG(Warning, TEXT("%s"), TEXT("GemSwapper->m_Counter>1"));
         return;
     }
     mSwapper[mCounter] = gem;

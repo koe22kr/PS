@@ -5,11 +5,11 @@
 #include "Gem.h"
 
 
-class Gem_Checker
+class GemSwapper
 {
 public:
-	Gem_Checker();
-	~Gem_Checker();
+    GemSwapper();
+	~GemSwapper();
     void Set_Gem(AGem* gem);
     
 public:
