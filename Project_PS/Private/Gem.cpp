@@ -24,14 +24,14 @@ void AGem::InitGem(const double& seed,const UINT8& idx, const FVector& pos, AGem
    
     //    mMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh222"));
 
-    mID = MakeGemID(seed + 0.1);
+    mColor = MakeGemID(seed + 0.1);
 
-    if (mID == GemColor::RED)
+    if (mColor == GemColor::RED)
     {
         mMesh->SetStaticMesh(pColorObj->mRed);
   
     }
-    else if (mID == GemColor::BLUE)
+    else if (mColor == GemColor::BLUE)
     {
         mMesh->SetStaticMesh(pColorObj->mBlue);
 

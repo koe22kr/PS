@@ -53,6 +53,7 @@ private:
         }
     }
      
+    
     GemColor MakeGemID(double seed)
     {
         double cosSeed = cos(seed);
@@ -60,14 +61,14 @@ private:
         return GemColor(id);
     };
 public:
-    inline GemColor& GetID() { return mID; };
+    inline GemColor& GetColor() { return mColor; };
     inline UINT8& GetIdx() { return mIdx; };
-    inline const GemColor GetID() const { return mID; };
-    inline const UINT8 GetIdx() const { return mIdx; };
+    inline const GemColor& GetColor() const { return mColor; };
+    inline const UINT8& GetIdx() const { return mIdx; };
 
-    inline void SetColor(const GemColor& setid) {
-        mID = setid; 
-       
+    inline void SetColor(const GemColor& setcolor) {
+        mColor = setcolor; 
+        mMesh->SetStaticMesh(GetColorMesh(mColor));
     };
 
     inline void SetIdx(const UINT8& setidx) { mIdx = setidx; };
@@ -82,7 +83,7 @@ private:
     UStaticMeshComponent* mMesh;
 
     FVector mPosition;
-    GemColor mID;
+    GemColor mColor;
     UINT8 mIdx;
 
 
