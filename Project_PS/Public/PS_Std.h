@@ -8,7 +8,7 @@
  *  Puzzule & Snake objectS,Enum
  */
 
-enum class GemID
+enum class GemColor
 {
     RED,GREEN,BLUE
 };

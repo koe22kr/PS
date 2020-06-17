@@ -7,9 +7,11 @@
 
 #include "GameFramework/Pawn.h"
 
-#include "PS_Std.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include <ConstructorHelpers.h>
+
+#include "PS_Std.h"
+#include "GemColorObj.h"
 
 #include "Gem.generated.h"
 
@@ -32,31 +34,55 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-public:
-   GemID MakeGemID(double seed)
-    {
-        double cosSeed = cos(seed);
-        uint8 id = static_cast<int>(cosSeed * 10000) % 3;
-        return GemID(id);
-    };
-public:
-    inline GemID& GetID() { return mID; };
-    inline UINT8& GetIdx() { return mIdx; };
-    inline const GemID GetID() const { return mID; };
-    inline const UINT8 GetIdx() const { return mIdx; };
-
-    inline void SetID(const GemID& setid) { mID = setid; };
-    inline void SetIdx(const UINT8& setidx) { mIdx = setidx; };
-
-    void SetGem(const double& seed,const UINT8& idx,const FVector& pos, AGemColorObj* pColorObj);
 
 private:
 
+    UStaticMesh* GetColorMesh(GemColor& gemcolor)
+    {
+        if (gemcolor == GemColor::RED)
+        {
+            return mpColorObj->mRed;
+        }
+        else if (gemcolor == GemColor::BLUE)
+        {
+            return mpColorObj->mBlue;
+        }
+        else
+        {
+            return mpColorObj->mGreen;
+        }
+    }
+     
+    GemColor MakeGemID(double seed)
+    {
+        double cosSeed = cos(seed);
+        uint8 id = static_cast<int>(cosSeed * 10000) % 3;
+        return GemColor(id);
+    };
+public:
+    inline GemColor& GetID() { return mID; };
+    inline UINT8& GetIdx() { return mIdx; };
+    inline const GemColor GetID() const { return mID; };
+    inline const UINT8 GetIdx() const { return mIdx; };
+
+    inline void SetColor(const GemColor& setid) {
+        mID = setid; 
+       
+    };
+
+    inline void SetIdx(const UINT8& setidx) { mIdx = setidx; };
+    
+    
+    
+    void InitGem(const double& seed,const UINT8& idx,const FVector& pos, AGemColorObj* pColorObj);
+
+private:
+    AGemColorObj* mpColorObj;
     UPROPERTY(VisibleAnywhere)
     UStaticMeshComponent* mMesh;
 
     FVector mPosition;
-    GemID mID;
+    GemColor mID;
     UINT8 mIdx;
 
 

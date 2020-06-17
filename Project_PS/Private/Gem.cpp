@@ -15,8 +15,9 @@ AGem::AGem()
    
 };
 
-void AGem::SetGem(const double& seed,const UINT8& idx, const FVector& pos, AGemColorObj* pColorObj)
+void AGem::InitGem(const double& seed,const UINT8& idx, const FVector& pos, AGemColorObj* pColorObj)
 {
+    mpColorObj = pColorObj;
     mIdx = idx;
     mPosition = pos;
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -25,22 +26,19 @@ void AGem::SetGem(const double& seed,const UINT8& idx, const FVector& pos, AGemC
 
     mID = MakeGemID(seed + 0.1);
 
-    if (mID == GemID::RED)
+    if (mID == GemColor::RED)
     {
         mMesh->SetStaticMesh(pColorObj->mRed);
-    //    mMesh->SetStaticMesh(mRed);
   
     }
-    else if (mID == GemID::BLUE)
+    else if (mID == GemColor::BLUE)
     {
-        //mMesh->SetStaticMesh(mBlue);
         mMesh->SetStaticMesh(pColorObj->mBlue);
 
         
     }
     else//GREEN
     {
-        //  mMesh->SetStaticMesh(mGreen);
         mMesh->SetStaticMesh(pColorObj->mGreen);
 
     }

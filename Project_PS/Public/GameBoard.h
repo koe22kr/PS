@@ -2,9 +2,10 @@
 
 #pragma once
 
-#include <Array.h>
 #include "CoreMinimal.h"
 #include "Engine/World.h"
+#include <Array.h>
+
 #include "Gem.h"
 #include "Project_PS.h"
 /**
@@ -25,18 +26,20 @@ public:
             KLOG_S(Warning);
             return false;
         }
+        mSizeX = sizeX;
+        mSizeY = sizeY;
         mBoard.Reserve(sizeX*sizeY);
         double PieceSeed = seed;
-        for (float i = 0; i < sizeY; i++)
+        for (float iy = 0; iy < sizeY; iy++)
         {
-            for (float k = 0; k < sizeX; k++)
+            for (float ix = 0; ix < sizeX; ix++)
             {
-                UINT8 idx = i * k + k;
+                UINT8 idx = iy * ix + ix;
 
-               FVector pos = { 80 * k, 80 * i, 200 };
+               FVector pos = { 80 * ix, 80 * iy, 200 };
                AGem* spawn = Cast<AGem>(mWorld->SpawnActor(AGem::StaticClass(), &pos));
 
-               spawn->SetGem(PieceSeed, idx, pos, pColorObj);
+               spawn->InitGem(PieceSeed, idx, pos, pColorObj);
                mBoard.Add(spawn);
 
                 PieceSeed += 0.1;
@@ -47,6 +50,9 @@ public:
    
 public:
     UWorld* mWorld;
- 
+   
+    //board size
+    UINT mSizeX;
+    UINT mSizeY;
     TArray<AGem*> mBoard;
 };
