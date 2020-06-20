@@ -21,3 +21,4 @@ void GemSwapper::Set_Gem(AGem* gem)
     mSwapper[mCounter] = gem;
     mCounter = mCounter ^ 1;
 }
+    

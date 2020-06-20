@@ -8,7 +8,9 @@ AGem::AGem()
 {
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
-    mMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
+    //RootComponent = mpMesh;
+    SetRootComponent(mpMesh);
+    mpMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 
 
 
@@ -25,23 +27,11 @@ void AGem::InitGem(const double& seed,const UINT8& idx, const FVector& pos, AGem
     //    mMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh222"));
 
     mColor = MakeGemID(seed + 0.1);
-
-    if (mColor == GemColor::RED)
+    if (!mpMesh->SetStaticMesh(GetColorMesh(mColor)))
     {
-        mMesh->SetStaticMesh(pColorObj->mRed);
+        KLOG_S(Warning);
+    }
   
-    }
-    else if (mColor == GemColor::BLUE)
-    {
-        mMesh->SetStaticMesh(pColorObj->mBlue);
-
-        
-    }
-    else//GREEN
-    {
-        mMesh->SetStaticMesh(pColorObj->mGreen);
-
-    }
 };
 
 

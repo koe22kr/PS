@@ -68,7 +68,7 @@ public:
 
     inline void SetColor(const GemColor& setcolor) {
         mColor = setcolor; 
-        mMesh->SetStaticMesh(GetColorMesh(mColor));
+        mpMesh->SetStaticMesh(GetColorMesh(mColor));
     };
 
     inline void SetIdx(const UINT8& setidx) { mIdx = setidx; };
@@ -80,7 +80,7 @@ public:
 private:
     AGemColorObj* mpColorObj;
     UPROPERTY(VisibleAnywhere)
-    UStaticMeshComponent* mMesh;
+    UStaticMeshComponent* mpMesh;
 
     FVector mPosition;
     GemColor mColor;

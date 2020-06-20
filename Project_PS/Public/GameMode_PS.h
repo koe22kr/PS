@@ -3,14 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameBoard.h"
+#include "PlayerSpot.h"
+#include "PlayerCamera.h"
+#include "GemColorObj.h"
 #include "GameFramework/GameModeBase.h"
 
 
-#include "GameBoard.h"
-#include "GemColorObj.h"
+
 #include "GameMode_PS.generated.h"
 
-
+DECLARE_DELEGATE(FDelegate);
 /**
  * 
  */
@@ -30,14 +33,17 @@ public:
 
 
 public:
-    UINT mSizeX=5;
-    UINT mSizeY=5;
+    Board_Std mpBoardStd;
+    //UINT mSizeX=5;
+    //UINT mSizeY=5;
     GameBoard mBoard;
     UINT mScore;
 
     AGemColorObj* mColorObj;
+    APlayerSpot* mpPlayerSpot;
+    APlayerCamera* mpPlayerCamera;
 
-    double mSeed=1.0;
+    double mSeed=1.0;//Goto std?
 
-
+    FDelegate mDelegate;
 };
