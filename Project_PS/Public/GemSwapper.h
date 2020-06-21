@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Gem.h"
+#include "GameBoard.h"
 
 
 class GemSwapper
@@ -10,9 +10,13 @@ class GemSwapper
 public:
     GemSwapper();
 	~GemSwapper();
-    void Set_Gem(AGem* gem);
-    
-public:
+    void Put(AGem* gem);
+    FVector2D Swap();
+private:
     AGem* mSwapper[2];
     UINT mCounter : 1;
+
+    bool bSwapping;
+    FTimerHandle GemSwapLerpHandle;
+    
 };

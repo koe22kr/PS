@@ -20,13 +20,18 @@ void AGameMode_PS::BeginPlay()
     ftrans.SetLocation(SpawnPos);
     mpPlayerSpot =Cast<APlayerSpot>( GetWorld()->SpawnActor(APlayerSpot::StaticClass(), &ftrans, SpawnParam));
     mpPlayerSpot->mpBoardStd = &mpBoardStd;
-    
+    mpPlayerSpot->mpBoard = &mBoard;
+    mpPlayerSpot->mpSwapper = &mSwapper;
+    mpPlayerSpot->Init();
+
     SpawnPos = ftrans.GetLocation();
     SpawnPos.Z += 100;
     ftrans.SetLocation(SpawnPos);
     mpPlayerCamera = Cast<APlayerCamera>(GetWorld()->SpawnActor(APlayerCamera::StaticClass(), &ftrans, SpawnParam));
     mpPlayerCamera->mpPlayerSpot = mpPlayerSpot;
     mpPlayerCamera->mpBoardStd = &mpBoardStd;
+    mpPlayerCamera->Init();
+    //mpPlayerCamera->mpBoard = &mBoard;
 }
 
 void AGameMode_PS::GameStart()

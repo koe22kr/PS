@@ -9,17 +9,17 @@ AGem::AGem()
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
     //RootComponent = mpMesh;
-    SetRootComponent(mpMesh);
     mpMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
+    SetRootComponent(mpMesh);
 
 
 
    
 };
 
-void AGem::InitGem(const double& seed,const UINT8& idx, const FVector& pos, AGemColorObj* pColorObj)
+void AGem::InitGem(const double& seed,const uint32& idx, const FVector& pos, AGemColorObj* ColorObj)
 {
-    mpColorObj = pColorObj;
+    mpColorObj = ColorObj;
     mIdx = idx;
     mPosition = pos;
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -48,3 +48,29 @@ void AGem::Tick(float DeltaTime)
 
 }
 
+void AGem::SetPos(const FVector& pos) 
+{ 
+    mPosition = pos;
+    SetActorLocation(pos);
+    
+};
+
+void AGem::SetGem(AGem* gem, uint32 idx)
+{
+    //SetColor(gem->GetColor());
+    SetPos(gem->mPosition);
+    if (idx)
+    {
+        SetIdx(idx);
+    }
+    else
+    {
+        SetIdx(gem->GetIdx());
+
+    }
+}
+void AGem::SetGem(const FVector& gempos, const uint32& idx)
+{
+    SetPos(gempos);
+    SetIdx(idx);
+}

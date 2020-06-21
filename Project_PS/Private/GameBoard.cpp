@@ -25,7 +25,7 @@ bool GameBoard::MakeBoard(UINT sizeX, UINT sizeY, double seed, AGemColorObj* pCo
     {
         for (float ix = 0; ix < sizeX; ix++)
         {
-            UINT8 idx = iy * ix + ix;
+            UINT idx = iy * sizeX + ix;
 
             FVector pos = { mpBoardStd->mLengthX * ix, mpBoardStd->mLengthY * iy, mpBoardStd->mBoardHight };
             AGem* spawn = Cast<AGem>(mpWorld->SpawnActor(AGem::StaticClass(), &pos));
@@ -38,3 +38,14 @@ bool GameBoard::MakeBoard(UINT sizeX, UINT sizeY, double seed, AGemColorObj* pCo
     }
     return true;
 };//
+
+AGem* GameBoard::GetGem(uint32 spotcountX, uint32 spotcountY)
+{
+    uint32 boardidx = mpBoardStd->mSizeX*spotcountY + spotcountX;  
+    return mBoard[boardidx];
+}
+
+void GameBoard::SwapGem(int boardidx, int boardidx2)
+{
+    mBoard.Swap(boardidx,boardidx2);
+}

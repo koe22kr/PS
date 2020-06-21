@@ -18,8 +18,8 @@ class Board_Std
 {
 public:
     
-   UINT mSizeX;
-   UINT mSizeY;
+   int mSizeX;
+   int mSizeY;
    float mLengthX;// = 80;
    float mLengthY;// = 80;
    float mBoardHight;// = 200;

@@ -57,25 +57,32 @@ private:
     GemColor MakeGemID(double seed)
     {
         double cosSeed = cos(seed);
-        uint8 id = static_cast<int>(cosSeed * 10000) % 3;
-        return GemColor(id);
+        uint32 id = static_cast<int>(cosSeed * 10000) ;
+        return GemColor(id % 3);
     };
 public:
     inline GemColor& GetColor() { return mColor; };
-    inline UINT8& GetIdx() { return mIdx; };
+    inline uint32& GetIdx() { return mIdx; };
     inline const GemColor& GetColor() const { return mColor; };
-    inline const UINT8& GetIdx() const { return mIdx; };
+    inline const uint32& GetIdx() const { return mIdx; };
+    inline const FVector& GetPos() const { return mPosition; };
+    void InitGem(const double& seed, const uint32& idx, const FVector& pos, AGemColorObj* colorobj);
 
+    //
+public:
+    void SetGem(AGem* gem, uint32 idx = 0);
+    void SetGem(const FVector& gempos,const uint32& idx);
+
+private:
     inline void SetColor(const GemColor& setcolor) {
         mColor = setcolor; 
         mpMesh->SetStaticMesh(GetColorMesh(mColor));
     };
+    void SetPos(const FVector& pos);
+    inline void SetIdx(const uint32& setidx) { mIdx = setidx; };
 
-    inline void SetIdx(const UINT8& setidx) { mIdx = setidx; };
     
-    
-    
-    void InitGem(const double& seed,const UINT8& idx,const FVector& pos, AGemColorObj* pColorObj);
+    //
 
 private:
     AGemColorObj* mpColorObj;
@@ -84,7 +91,7 @@ private:
 
     FVector mPosition;
     GemColor mColor;
-    UINT8 mIdx;
+    uint32 mIdx;
 
 
 public:

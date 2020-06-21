@@ -21,8 +21,10 @@ public:
         mpWorld = pworld; 
         mpBoardStd = pboardstd;
     };
-    bool MakeBoard(UINT sizeX, UINT sizeY, double seed, AGemColorObj* pColorObj);
-   
+    bool MakeBoard(uint32 sizeX, uint32 sizeY, double seed, AGemColorObj* pColorObj);
+    AGem* GetGem(uint32 idxX, uint32 idxY);
+    void SwapGem(int boardidx, int boardidx2);
+    //AGem* GetGem(AGem* gem)
 public:
     UWorld* mpWorld;
     Board_Std* mpBoardStd;

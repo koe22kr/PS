@@ -13,6 +13,7 @@
 #include "PlayerCamera.generated.h"
 
 class APlayerSpot;
+//class GameBoard;
 
 UCLASS()
 class PROJECT_PS_API APlayerCamera : public APawn
@@ -34,21 +35,22 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 private:
-    uint8 mSpotCountX;
-    uint8 mSpotCountY;
-    uint8 mCameraCountX;
-    uint8 mCameraCountY;
+    int mSpotCountX;
+    int mSpotCountY;
+    int mCameraCountX;
+    int mCameraCountY;
 
-    uint8 mCameraMoveOffset;
+    int mCameraMoveOffset;
 public:
     APlayerSpot* mpPlayerSpot;
     Board_Std* mpBoardStd;
-
+    //GameBoard* mpBoard;
     UPROPERTY(VisibleAnywhere,Category = "Camera")
     UCameraComponent* mpCamera;
     UPROPERTY(VisibleAnywhere, Category = "Camera")
     USpringArmComponent* mpSpringArm;
 public:
+    void Init() {};
     void Up();
     void Down();
     void Left();

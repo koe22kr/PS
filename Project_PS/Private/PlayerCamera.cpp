@@ -9,7 +9,12 @@ APlayerCamera::APlayerCamera()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-    mSpotCountX, mSpotCountY, mCameraCountX, mCameraCountY = 1;
+    
+    mSpotCountX = 1;
+    mSpotCountY = 1; 
+    mCameraCountX = 1;
+    mCameraCountY = 1;
+
     mCameraMoveOffset = 3;
     AutoPossessPlayer = EAutoReceiveInput::Player0;
     
@@ -54,8 +59,8 @@ void APlayerCamera::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 void APlayerCamera::Up()
 {
-    mpPlayerSpot->Up(mSpotCountX);
-    if ((mSpotCountX - mCameraCountX) >= mCameraMoveOffset)
+    mpPlayerSpot->Up(mSpotCountX, mSpotCountY);
+    if ((int(mSpotCountX - mCameraCountX)) >= mCameraMoveOffset)
     {
         mCameraCountX++;
         FVector ActorPos = GetActorLocation();
@@ -65,8 +70,8 @@ void APlayerCamera::Up()
 }
 void APlayerCamera::Down()
 {
-    mpPlayerSpot->Down(mSpotCountX);
-    if ((mCameraCountX - mSpotCountX) >= mCameraMoveOffset)
+    mpPlayerSpot->Down(mSpotCountX, mSpotCountY);
+    if ((int(mCameraCountX - mSpotCountX)) >= mCameraMoveOffset)
     {
         mCameraCountX--;
         FVector ActorPos = GetActorLocation();
@@ -76,8 +81,8 @@ void APlayerCamera::Down()
 }
 void APlayerCamera::Left()
 {
-    mpPlayerSpot->Left(mSpotCountY);
-    if ( (mCameraCountY - mSpotCountY) >= mCameraMoveOffset)
+    mpPlayerSpot->Left(mSpotCountX, mSpotCountY);
+    if ( ((int)(mCameraCountY - mSpotCountY)) >= mCameraMoveOffset)
     {
         mCameraCountY--;
         FVector ActorPos = GetActorLocation();
@@ -87,8 +92,8 @@ void APlayerCamera::Left()
 }
 void APlayerCamera::Right()
 {
-    mpPlayerSpot->Right(mSpotCountY);
-    if ((mSpotCountY- mCameraCountY) >= mCameraMoveOffset)
+    mpPlayerSpot->Right(mSpotCountX, mSpotCountY);
+    if (int(mSpotCountY- mCameraCountY) >= mCameraMoveOffset)
     {
         mCameraCountY++;
         FVector ActorPos = GetActorLocation();

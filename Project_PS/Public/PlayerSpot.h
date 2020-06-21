@@ -8,6 +8,8 @@
 #include "GameFramework/Character.h"
 #include "PlayerSpot.generated.h"
 
+class GameBoard;
+class GemSwapper;
 UCLASS()
 class PROJECT_PS_API APlayerSpot : public APawn
 {
@@ -31,13 +33,16 @@ public:
     UPROPERTY(VisibleAnywhere)
     UStaticMeshComponent* mpMesh;
     Board_Std* mpBoardStd;
+    GameBoard* mpBoard;
+    GemSwapper* mpSwapper;
 private://|x,y count| > n  => camera move;
 
-
+    void PutandSwap(int& spotCountX, int& spotCountY);
 public:
-    void Up(uint8& spotCount);
-    void Down(uint8& spotCount);
-    void Left(uint8& spotCount);
-    void Right(uint8& spotCount);
+    void Init();
+    void Up(int& spotCountX, int& spotCountY);
+    void Down(int& spotCountX, int& spotCountY);
+    void Left(int& spotCountX, int& spotCountY);
+    void Right(int& spotCountX, int& spotCountY);
     void Esc();// {};
 };

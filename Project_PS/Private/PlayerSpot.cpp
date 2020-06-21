@@ -3,7 +3,7 @@
 
 #include "PlayerSpot.h"
 #include "GameMode_PS.h"
-
+#include "GemSwapper.h"
 #include "Engine/Classes/Components/InputComponent.h"
 // Sets default values
 APlayerSpot::APlayerSpot()
@@ -12,14 +12,14 @@ APlayerSpot::APlayerSpot()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-    SetRootComponent(mpMesh);
     mpMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
     ConstructorHelpers::FObjectFinder<UStaticMesh> TMesh(TEXT("StaticMesh'/Game/MyGame_/StaticMesh/Cube.Cube'"));
     if (TMesh.Succeeded())
     {
         mpMesh->SetStaticMesh(TMesh.Object);
     }
-    
+    SetRootComponent(mpMesh);
+
 
 }
 
@@ -34,7 +34,6 @@ void APlayerSpot::BeginPlay()
 void APlayerSpot::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
- 
 }
 
 // Called to bind functionality to input
@@ -44,48 +43,70 @@ void APlayerSpot::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
    
 }
 
-void APlayerSpot::Up(uint8& spotCount)
+void APlayerSpot::Up(int& spotCountX, int& spotCountY)
 {
     
-    if (spotCount <mpBoardStd->mSizeX)
+    if (spotCountX <mpBoardStd->mSizeX)
     {
-        spotCount++;
+        spotCountX++;
         FVector ActorPos = GetActorLocation();
         ActorPos.X += mpBoardStd->mLengthX;
         SetActorLocation(ActorPos);
+
+        PutandSwap(spotCountX, spotCountY);
     }
 }
-void APlayerSpot::Down(uint8& spotCount)
+void APlayerSpot::Down(int& spotCountX, int& spotCountY)
 {
-    if (spotCount > 1)
+    if (spotCountX > 1)
     {
-        spotCount--;
+        spotCountX--;
         FVector ActorPos = GetActorLocation();
         ActorPos.X -= mpBoardStd->mLengthX;
         SetActorLocation(ActorPos);
+
+        PutandSwap(spotCountX, spotCountY);
     }
 }
-void APlayerSpot::Left(uint8& spotCount)
+void APlayerSpot::Left(int& spotCountX, int& spotCountY)
 {
-    if (spotCount > 1)
+    if (spotCountY > 1)
     {
-        spotCount--;
+        spotCountY--;
         FVector ActorPos = GetActorLocation();
         ActorPos.Y -= mpBoardStd->mLengthY;
         SetActorLocation(ActorPos);
+
+        PutandSwap(spotCountX, spotCountY);
     }
 }
-void APlayerSpot::Right(uint8& spotCount)
+void APlayerSpot::Right(int& spotCountX, int& spotCountY)
 {
-    if (spotCount < mpBoardStd->mSizeY)
+    if (spotCountY < mpBoardStd->mSizeY)
     {
-        spotCount++;
+        spotCountY++;
         FVector ActorPos = GetActorLocation();
         ActorPos.Y += mpBoardStd->mLengthY;
         SetActorLocation(ActorPos);
+
+        PutandSwap(spotCountX, spotCountY);
     }
 }
 void APlayerSpot::Esc()
 {
 
 };
+
+void APlayerSpot::Init()
+{
+    AGem* gem = mpBoard->GetGem(0,0);
+    mpSwapper->Put(gem);
+}
+
+void APlayerSpot::PutandSwap(int& spotCountX, int& spotCountY)
+{
+    AGem* gem = mpBoard->GetGem(spotCountX - 1, spotCountY - 1);
+    mpSwapper->Put(gem);
+    FVector2D indexpair = mpSwapper->Swap();
+    mpBoard->SwapGem(indexpair.X,indexpair.Y);
+}

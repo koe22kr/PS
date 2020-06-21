@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameBoard.h"
+#include "GemSwapper.h"
 #include "PlayerSpot.h"
 #include "PlayerCamera.h"
-#include "GemColorObj.h"
+//#include "GemColorObj.h"
 #include "GameFramework/GameModeBase.h"
 
 
@@ -37,6 +37,7 @@ public:
     //UINT mSizeX=5;
     //UINT mSizeY=5;
     GameBoard mBoard;
+    GemSwapper mSwapper;
     UINT mScore;
 
     AGemColorObj* mColorObj;
