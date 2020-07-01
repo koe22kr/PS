@@ -6,4 +6,4 @@ Title : Puzzle Snake
 
 클래스 계층
 
-![Untitled Diagram (1)](https://user-images.githubusercontent.com/49256779/85749602-f3407100-b743-11ea-9771-5a325a013f84.png)
+![Untitled Diagram (1)](https://user-images.githubusercontent.com/49256779/86203300-a58e9300-bb9f-11ea-815c-6ebcb74fae53.png)
